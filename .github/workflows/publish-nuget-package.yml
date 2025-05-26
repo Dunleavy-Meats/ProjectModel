@@ -10,6 +10,9 @@ on:
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -18,10 +21,18 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '7.0.x'
+      
+      # Restore dependencies first
+      - name: Restore dependencies
+        run: dotnet restore Models/Models.csproj
+      
+      # Build the project explicitly
+      - name: Build project
+        run: dotnet build Models/Models.csproj -c Release --no-restore
           
-      # Build the NuGet package
-      - name: Build and Pack
-        run: dotnet pack Models/Models.csproj -c Release -o ./nupkg
+      # Then pack the NuGet package
+      - name: Pack NuGet Package
+        run: dotnet pack Models/Models.csproj -c Release --no-build -o ./nupkg
 
       # Create GitHub Pages branch with package
       - name: Setup GitHub Pages
