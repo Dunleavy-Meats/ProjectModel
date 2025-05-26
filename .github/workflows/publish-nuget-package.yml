@@ -1,0 +1,44 @@
+name: Publish NuGet Package
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'Models/**'
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.x'
+          
+      # Build the NuGet package
+      - name: Build and Pack
+        run: dotnet pack Models/Models.csproj -c Release -o ./nupkg
+
+      # Create GitHub Pages branch with package
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v3
+        
+      # Deploy the NuGet package to GitHub Pages
+      - name: Deploy NuGet package to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: ./nupkg
+          clean: true
+          
+      # Publish the package to GitHub Packages
+      - name: Publish to GitHub Packages
+        run: |
+          dotnet nuget push ./nupkg/*.nupkg \
+            --api-key ${{ secrets.GITHUB_TOKEN }} \
+            --source https://nuget.pkg.github.com/dunleavy-meats/index.json
