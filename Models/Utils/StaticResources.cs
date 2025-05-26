@@ -9,15 +9,15 @@ namespace Models.Utils
         public static int ExpiryDaysAmount => 7;
 
         public static readonly string DunleavyMeatsDisclaimer = @"
-In consideration of Dunleavy Meats Ltd. granting me access to its premises, facilities and equipment, I agree to the following:
+In consideration of Dunleavy Meats Ulc. granting me access to its premises, facilities and equipment, I agree to the following:
 
 I will observe and obey all rules and warnings at the premises, and further, to follow any oral directions or instructions given by Dunleavy Meats or persons designated by Dunleavy Meats. In particular, I will not enter any part of the premises unless directed by a member of staff. 
 
-Photography, video recording, or capturing any visual or audio content through cameras, mobile phones, tablets, or any other electronic device is strictly prohibited on the premises unless explicit written permission has been granted by Dunleavy Meats Ltd. This includes but is not limited to taking photos, recording videos, making audio recordings, or using video conferencing or streaming applications. Any such activity without proper authorization will be considered a breach of this agreement and may lead to legal action or immediate removal from the premises.
+Photography, video recording, or capturing any visual or audio content through cameras, mobile phones, tablets, or any other electronic device is strictly prohibited on the premises unless explicit written permission has been granted by Dunleavy Meats Ulc. This includes but is not limited to taking photos, recording videos, making audio recordings, or using video conferencing or streaming applications. Any such activity without proper authorization will be considered a breach of this agreement and may lead to legal action or immediate removal from the premises.
 
 Prior to engaging in any activity at the premises, I will inspect the facilities and equipment to be used by me or in proximity to me. If I believe that there may be a safety issue with the facilities or the equipment, I will immediately bring this matter to the attention of a senior member of staff of Dunleavy Meats. If the safety issue is not resolved to my satisfaction, I will remove myself from the premises.
 
-I recognise that there are certain inherent risks associated with equipment and facilities of a type that I may encounter at the premises. I assume full responsibility for any personal injury caused to myself and I further release, discharge and hold harmless Dunleavy Meats Ltd and any other persons associated in anyway therewith, for any injury, loss or damage whether caused by the fault of myself, Dunleavy Meats, or other third parties.
+I recognise that there are certain inherent risks associated with equipment and facilities of a type that I may encounter at the premises. I assume full responsibility for any personal injury caused to myself and I further release, discharge and hold harmless Dunleavy Meats Ulc and any other persons associated in anyway therewith, for any injury, loss or damage whether caused by the fault of myself, Dunleavy Meats, or other third parties.
 
 I will fully release, discharge and hold harmless Dunleavy Meats and any other persons associated in anyway therewith, from any and all claims, actions, liabilities and causes of action, whether involving negligence or intentional actions or omissions which may accrue as a result of my voluntary presence at the premises of Dunleavy Meats.
 

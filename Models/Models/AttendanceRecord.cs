@@ -343,6 +343,14 @@ namespace Models
                 Question = "Please be aware that this is a nut free site. Tick to confirm you understand",
 				ShouldBeFalse = false
 			};
+            
+            //Please be aware that this is a nut free site. Tick to confirm you understand?
+            Questioner question12 = new Questioner
+            {
+                Id = "1Aqd1dY1P8wIHUhfJE9n",
+                Question = "Use of cameras or electronic devices on the premises is strictly forbidden. Do you understand and agree to comply with this policy?",
+				ShouldBeFalse = false
+			};
 
             Questioners.Add(question1);
             Questioners.Add(question2);
@@ -355,7 +363,7 @@ namespace Models
             Questioners.Add(question9);
             Questioners.Add(question10);
             Questioners.Add(question11);
-
+            Questioners.Add(question12);
         }
     }
 }
