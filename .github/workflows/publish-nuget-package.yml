@@ -31,19 +31,32 @@ jobs:
       # Pack the NuGet package
       - name: Pack NuGet Package
         run: dotnet pack Models/Models.csproj -c Release --no-build -o ./nupkg
-          
-      # Publish to GitHub Packages with public visibility
-      - name: Publish to GitHub Packages
+      
+      # Prepare NuGet feed structure
+      - name: Prepare NuGet feed structure
         run: |
-          dotnet nuget push --skip-duplicate ./nupkg/*.nupkg \
-            --api-key ${{ secrets.GITHUB_TOKEN }} \
-            --source https://nuget.pkg.github.com/dunleavy-meats/index.json
+          # Create proper folder structure for GitHub Pages NuGet feed
+          mkdir -p ./nuget-feed/packages/dunleavymeats.models/1.0.0
+          cp ./nupkg/DunleavyMeats.Models.1.0.0.nupkg ./nuget-feed/packages/dunleavymeats.models/1.0.0/
           
-      # Additionally, publish to NuGet.org if you want wider availability
-      - name: Setup NuGet
-        uses: NuGet/setup-nuget@v1.2.0
-        with:
-          nuget-version: '6.x'
+          # Create index.json at root for NuGet v3 feed
+          cat > ./nuget-feed/index.json << 'EOL'
+          {
+            "version": "3.0.0",
+            "resources": [
+              {
+                "@id": "https://dunleavy-meats.github.io/ProjectModel/packages/",
+                "@type": "PackageBaseAddress/3.0.0"
+              }
+            ]
+          }
+          EOL
+          
+          # Create lowercase version for case-sensitive lookups
+          cp ./nupkg/DunleavyMeats.Models.1.0.0.nupkg ./nuget-feed/packages/dunleavymeats.models/1.0.0/dunleavymeats.models.1.0.0.nupkg
+          
+          # Copy package directly to root as well (belt and suspenders approach)
+          cp ./nupkg/DunleavyMeats.Models.1.0.0.nupkg ./nuget-feed/
           
       # Make the package publicly available via GitHub Pages
       - name: Deploy NuGet package to GitHub Pages
@@ -51,5 +64,12 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
-          folder: ./nupkg
+          folder: ./nuget-feed
           clean: true
+      
+      # Publish to GitHub Packages with public visibility
+      - name: Publish to GitHub Packages
+        run: |
+          dotnet nuget push --skip-duplicate ./nupkg/*.nupkg \
+            --api-key ${{ secrets.GITHUB_TOKEN }} \
+            --source https://nuget.pkg.github.com/dunleavy-meats/index.json
