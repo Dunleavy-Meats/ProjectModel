@@ -1,0 +1,9 @@
+{
+  "version": "3.0.0",
+  "resources": [
+    {
+      "@id": "https://dunleavy-meats.github.io/ProjectModel/packages/",
+      "@type": "PackageBaseAddress/3.0.0"
+    }
+  ]
+}
